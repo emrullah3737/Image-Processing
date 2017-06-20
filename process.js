@@ -72,4 +72,20 @@ module.exports = class ImageProcess {
         .then(resolve);
     });
   }
+
+  fit(inputImg, outputImg, height, width, gravity) {
+    return new Promise((resolve) => {
+      const command = ['convert', inputImg, '-thumbnail', `${height}x${width}^`, '-gravity', gravity, '-extent', `${height}x${width}`, outputImg];
+      this.exec(command)
+        .then(resolve);
+    });
+  }
+
+  contrast(inputImg, outputImg, contrast) {
+    return new Promise((resolve) => {
+      const command = ['convert', inputImg, '-sigmoidal-contrast', `${contrast},0%`, outputImg];
+      this.exec(command)
+        .then(resolve);
+    });
+  }
 };
